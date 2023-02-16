@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Project = require("../models/projectModel");
 
 //Get all projects
-const getAllProjets = async (req, res) => {
+const getAllProjects = async (req, res) => {
   const projects = await Project.find({});
 
   res.status(200).json(projects);
@@ -69,7 +69,7 @@ const updateProject = async (req, res) => {
 
 module.exports = {
   postProject,
-  getAllProjets,
+  getAllProjects,
   getSignleProject,
   deleteProject,
   updateProject,

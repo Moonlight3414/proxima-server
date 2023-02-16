@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
+const cors = require("cors");
 const projectRoutes = require("./routes/projectRoute");
 const mongoose = require("mongoose");
 
@@ -11,6 +12,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 //Middlewares
+app.use(cors());
 app.use(express.json());
 app.use((req, res, next) => {
   console.log(req.path, req.method);
@@ -18,7 +20,7 @@ app.use((req, res, next) => {
 });
 
 //Routes
-app.use("/api/projets", projectRoutes);
+app.use("/api/projects", projectRoutes);
 
 //Mongodb
 mongoose.set("strictQuery", false); //optional

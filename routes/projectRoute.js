@@ -1,7 +1,7 @@
 const express = require("express");
 const {
   postProject,
-  getAllProjets,
+  getAllProjects,
   getSignleProject,
   deleteProject,
   updateProject,
@@ -12,7 +12,7 @@ const Project = require("../models/projectModel");
 const router = express.Router();
 
 //GET all projects
-router.get("/", getAllProjets);
+router.get("/", getAllProjects);
 
 //GET a single project
 router.get("/:id", getSignleProject);

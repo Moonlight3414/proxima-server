@@ -1,9 +1,10 @@
 require("dotenv").config();
 
 const express = require("express");
+const mongoose = require("mongoose");
 const cors = require("cors");
 const projectRoutes = require("./routes/projectRoute");
-const mongoose = require("mongoose");
+const userRoutes = require("./routes/userRoute");
 
 //Express App
 const app = express();
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
 
 //Routes
 app.use("/api/projects", projectRoutes);
+app.use("/api/user", userRoutes);
 
 //Mongodb
 mongoose.set("strictQuery", false); //optional

@@ -3,7 +3,8 @@ const Project = require("../models/projectModel");
 
 //Get all projects
 const getAllProjects = async (req, res) => {
-  const projects = await Project.find({}).sort({ createdAt: -1 }); // Desending, newly added poroject on top
+  const user_id = req.user._id;
+  const projects = await Project.find({ user_id }).sort({ createdAt: -1 }); // Desending, newly added poroject on top
 
   res.status(200).json(projects);
 };
@@ -61,8 +62,10 @@ const postProject = async (req, res) => {
   }
 
   try {
+    const user_id = req.user._id;
     const project = await Project.create({
       ...req.body,
+      user_id,
     });
 
     res.status(200).json(project);
@@ -74,11 +77,13 @@ const postProject = async (req, res) => {
 //Delete a project
 const deleteProject = async (req, res) => {
   const { id } = req.params;
+
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ messege: "Invalid project id" });
   }
 
   const project = await Project.findOneAndDelete({ _id: id });
+
   if (!project) {
     return res.status(400).json({ messege: "No project found!" });
   }
@@ -133,6 +138,7 @@ const updateProject = async (req, res) => {
     { ...req.body },
     { new: true }
   );
+
   if (!project) {
     return res.status(400).json({ messege: "No project found!" });
   }

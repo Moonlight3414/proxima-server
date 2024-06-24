@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const projectRoutes = require("./routes/projectRoute");
 const userRoutes = require("./routes/userRoute");
+const healthRoute = require("./routes/healthRoute");
 
 //Express App
 const app = express();
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
 });
 
 //Routes
+app.use("/api/health", healthRoute);
 app.use("/api/projects", projectRoutes);
 app.use("/api/user", userRoutes);
 
